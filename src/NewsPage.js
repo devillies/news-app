@@ -5,11 +5,14 @@ import {
   View,
   WebView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 class NewsPage extends React.Component {
   state = {
-    newsList: []
+    newsList: [],
+    openWeb: false,
+    url: ""
   };
   componentDidMount() {
     this._fetching();
@@ -19,26 +22,40 @@ class NewsPage extends React.Component {
     let news = navigation.getParam("news");
     this.setState({ newsList: news });
   }
-  _navigate(url) {
-    console.log(url);
-    return <WebView source={{ uri: url }} />;
+  _toggleView(url) {
+    let { openWeb } = this.state;
+    this.setState({ openWeb: !openWeb, url: url });
   }
-
   render() {
-    let { newsList } = this.state;
+    let { newsList, openWeb, url } = this.state;
 
-    return (
+    return openWeb ? (
+      <WebView
+        style={{ marginTop: 20, flex: 1 }}
+        source={{ uri: url }}
+        onLoad={() => <Text>loading...</Text>}
+      />
+    ) : (
       <ScrollView style={styles.mainPage}>
         {newsList.map((data, idx) => {
           return (
             <TouchableOpacity
               key={idx}
-              onPress={() => this._navigate(data.url)}
+              onPress={() => this._toggleView(data.url)}
             >
-              <View>
-                <Text style={styles.container}>
-                  {data.title}-{data.name}
-                </Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row"
+                }}
+              >
+                <Image
+                  style={{ height: 100, width: 100, alignSelf: "flex-start" }}
+                  source={{ uri: data.image }}
+                />
+                <View style={styles.textWrapper}>
+                  <Text style={styles.text}>{data.title}</Text>
+                </View>
               </View>
             </TouchableOpacity>
           );
@@ -48,14 +65,15 @@ class NewsPage extends React.Component {
   }
 }
 let styles = StyleSheet.create({
-  mainPage: {
-    flex: 1,
-    margin: 40
+  text: {
+    fontSize: 18
   },
-  container: {
+  textWrapper: {
     flex: 1,
+    alignItems: "stretch",
     borderWidth: 1,
-    alignItems: "stretch"
+    borderTopRightRadius: 8,
+    paddingHorizontal: 10
   }
 });
 export default NewsPage;

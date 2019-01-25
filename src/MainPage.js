@@ -12,7 +12,8 @@ class MainPage extends React.Component {
     title: "welcome"
   };
   state = {
-    news: []
+    news: [],
+    sourcesName: []
   };
 
   componentDidMount() {
@@ -20,47 +21,48 @@ class MainPage extends React.Component {
   }
 
   async _fetching() {
-    let url =
-      "https://newsapi.org/v2/top-headlines?" +
-      "country=us&" +
-      "apiKey=7b86bce8f2f846f19fa53f9c73c89da1";
-    let res = await fetch(url);
+    let res = await fetch(
+      "https://newsapi.org/v2/top-headlines?country=id&apiKey=7b86bce8f2f846f19fa53f9c73c89da1"
+    );
     let result = await res.json();
     let newsData = result.articles.map(data => {
       return {
-        source: data.source,
-        author: data.author,
+        name: data.source.name,
         title: data.title,
         url: data.url,
-        urlToImage: data.urlToImage
+        image: data.urlToImage
       };
     });
-    this.setState({ news: newsData });
+    sourcesName = [];
+    for (let data of newsData) {
+      if (!sourcesName.includes(data.name)) {
+        sourcesName.push(data.name);
+      }
+    }
+    this.setState({ news: newsData, sourcesName: sourcesName });
   }
 
   _navigate(dataName) {
     let { news } = this.state;
     let { navigate } = this.props.navigation;
     let filteredNews = news.filter(data => {
-      return dataName == data.source.name ? data : null;
+      return dataName === data.name;
     });
-    console.log(filteredNews);
     navigate("Page", { news: filteredNews });
   }
+
   render() {
     let { navigate } = this.props.navigation;
-    let { news } = this.state;
+    let { news, sourcesName } = this.state;
+
     return (
       <ScrollView style={{ flex: 1, marginTop: 20 }}>
         <View style={{ borderWidth: 1, alignItems: "stretch" }}>
-          {news.map(({ source }, idx) => {
+          {sourcesName.map((name, idx) => {
             return (
-              <TouchableOpacity
-                key={idx}
-                onPress={() => this._navigate(source.name)}
-              >
+              <TouchableOpacity key={idx} onPress={() => this._navigate(name)}>
                 <View style={styles.container}>
-                  <Text>{source.name}</Text>
+                  <Text style={styles.text}>{name}</Text>
                 </View>
               </TouchableOpacity>
             );
@@ -71,13 +73,13 @@ class MainPage extends React.Component {
   }
 }
 let styles = StyleSheet.create({
-  mainPage: {
-    flex: 1,
-    margin: 40
+  text: {
+    fontSize: 24
   },
   container: {
     flex: 1,
     borderWidth: 1,
+    borderRadius: 7,
     alignItems: "stretch"
   }
 });
