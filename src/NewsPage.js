@@ -32,17 +32,17 @@ class NewsPage extends React.Component {
     ) : (
       <View>
         <Header
-          leftComponent={{
-            text: "back",
-            onPress: () => goBack(),
-            style: { color: "#fff" }
-          }}
+          // leftComponent={{
+          //   text: "back",
+          //   onPress: () => goBack(),
+          //   style: { color: "#fff" }
+          // }}
           centerComponent={{
             text: "News",
-            style: { color: "#fff", fontSize: 36 }
+            style: { color: "#fff", fontSize: 36, paddingBottom: 90 }
           }}
         />
-        <ScrollView style={styles.mainPage}>
+        <ScrollView style={styles.newsPage}>
           {newsList.map((data, idx) => {
             return (
               <ListItem
@@ -59,19 +59,8 @@ class NewsPage extends React.Component {
   }
 }
 let styles = StyleSheet.create({
-  title: {
-    alignSelf: "center",
-    fontSize: 30
-  },
-  text: {
-    fontSize: 18
-  },
-  textWrapper: {
-    flex: 1,
-    alignItems: "stretch",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10
+  newsPage: {
+    marginTop: 10
   }
 });
 export default NewsPage;

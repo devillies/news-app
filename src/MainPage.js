@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   TextInput,
-  Text,
   ScrollView,
   TouchableOpacity,
   StyleSheet
@@ -63,7 +62,8 @@ class MainPage extends React.Component {
             text: "News Source",
             style: {
               color: "#fff",
-              fontSize: 36
+              fontSize: 36,
+              paddingBottom: 90
             }
           }}
         />
@@ -86,17 +86,9 @@ class MainPage extends React.Component {
   }
 }
 let styles = StyleSheet.create({
-  text: {
-    fontSize: 24
-  },
   scrollStyle: {
-    backgroundColor: "#fff"
-  },
-  container: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 7,
-    alignItems: "stretch"
+    backgroundColor: "#fff",
+    marginTop: 10
   }
 });
 export default MainPage;
