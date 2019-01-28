@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
+import { Header } from "react-native-elements";
 class MainPage extends React.Component {
   navigationOptions = {
     title: "welcome"
@@ -56,25 +57,43 @@ class MainPage extends React.Component {
     let { news, sourcesName } = this.state;
 
     return (
-      <ScrollView style={{ flex: 1, marginTop: 20 }}>
-        <View style={{ borderWidth: 1, alignItems: "stretch" }}>
-          {sourcesName.map((name, idx) => {
-            return (
-              <TouchableOpacity key={idx} onPress={() => this._navigate(name)}>
-                <View style={styles.container}>
-                  <Text style={styles.text}>{name}</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
+      <View>
+        <Header
+          leftComponent={{ icon: "menu", color: "#fff" }}
+          centerComponent={{
+            text: "News Source",
+            style: { color: "#fff", fontSize: 24 }
+          }}
+          rightComponent={{ icon: "home", color: "#fff" }}
+        />
+
+        <ScrollView style={styles.scrollStyle}>
+          <View style={{ borderWidth: 1, alignItems: "stretch" }}>
+            {sourcesName.map((name, idx) => {
+              return (
+                <TouchableOpacity
+                  key={idx}
+                  onPress={() => this._navigate(name)}
+                >
+                  <View style={styles.container}>
+                    <Text style={styles.text}>{name}</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
 let styles = StyleSheet.create({
   text: {
     fontSize: 24
+  },
+  scrollStyle: {
+    marginTop: 10,
+    backgroundColor: "#eae6ed"
   },
   container: {
     flex: 1,

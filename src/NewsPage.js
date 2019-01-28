@@ -28,6 +28,7 @@ class NewsPage extends React.Component {
   }
   render() {
     let { newsList, openWeb, url } = this.state;
+    let { goBack } = this.props.navigation;
 
     return openWeb ? (
       <WebView
@@ -37,6 +38,7 @@ class NewsPage extends React.Component {
       />
     ) : (
       <ScrollView style={styles.mainPage}>
+        <Text style={styles.title}>News</Text>
         {newsList.map((data, idx) => {
           return (
             <TouchableOpacity
@@ -65,6 +67,10 @@ class NewsPage extends React.Component {
   }
 }
 let styles = StyleSheet.create({
+  title: {
+    alignSelf: "center",
+    fontSize: 30
+  },
   text: {
     fontSize: 18
   },
@@ -72,7 +78,7 @@ let styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     borderWidth: 1,
-    borderTopRightRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 10
   }
 });
