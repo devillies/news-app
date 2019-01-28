@@ -42,3 +42,27 @@ let filteredArr = arr.filter(data => {
   return data.name === name ? "not found" : data === name;
 });
 console.log(filteredArr);
+
+// old touchable
+<TouchableOpacity key={idx} onPress={() => this._toggleView(data.url)}>
+  <View
+    style={{
+      flex: 1,
+      flexDirection: "row"
+    }}
+  >
+    <Image
+      style={{ height: 100, width: 100, alignSelf: "flex-start" }}
+      source={{ uri: data.image }}
+    />
+    <View style={styles.textWrapper}>
+      <Text style={styles.text}>{data.title}</Text>
+    </View>
+  </View>
+</TouchableOpacity>;
+// old mainpage List
+<TouchableOpacity key={idx} onPress={() => this._navigate(name)}>
+  <View style={styles.container}>
+    <Text style={styles.text}>{name}</Text>
+  </View>
+</TouchableOpacity>;

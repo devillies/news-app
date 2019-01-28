@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  ScrollView,
-  Text,
-  View,
-  WebView,
-  StyleSheet,
-  TouchableOpacity,
-  Image
-} from "react-native";
-import { Header } from "react-native-elements";
+import { ScrollView, Text, View, WebView, StyleSheet } from "react-native";
+import { Header, Image, ListItem } from "react-native-elements";
 class NewsPage extends React.Component {
   state = {
     newsList: [],
@@ -53,25 +45,12 @@ class NewsPage extends React.Component {
         <ScrollView style={styles.mainPage}>
           {newsList.map((data, idx) => {
             return (
-              <TouchableOpacity
+              <ListItem
                 key={idx}
+                title={data.title}
                 onPress={() => this._toggleView(data.url)}
-              >
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row"
-                  }}
-                >
-                  <Image
-                    style={{ height: 100, width: 100, alignSelf: "flex-start" }}
-                    source={{ uri: data.image }}
-                  />
-                  <View style={styles.textWrapper}>
-                    <Text style={styles.text}>{data.title}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+                leftAvatar={{ source: { uri: data.image } }}
+              />
             );
           })}
         </ScrollView>

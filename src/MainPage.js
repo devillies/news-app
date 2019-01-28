@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-import { Header } from "react-native-elements";
+import { Header, ListItem } from "react-native-elements";
 class MainPage extends React.Component {
   navigationOptions = {
     title: "welcome"
@@ -69,17 +69,14 @@ class MainPage extends React.Component {
         />
 
         <ScrollView style={styles.scrollStyle}>
-          <View style={{ borderWidth: 1, alignItems: "stretch" }}>
+          <View>
             {sourcesName.map((name, idx) => {
               return (
-                <TouchableOpacity
+                <ListItem
                   key={idx}
+                  title={name}
                   onPress={() => this._navigate(name)}
-                >
-                  <View style={styles.container}>
-                    <Text style={styles.text}>{name}</Text>
-                  </View>
-                </TouchableOpacity>
+                />
               );
             })}
           </View>
