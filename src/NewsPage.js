@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, Text, View, WebView, StyleSheet } from "react-native";
-import { Header, Image, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 class NewsPage extends React.Component {
   state = {
     newsList: [],
@@ -31,17 +31,7 @@ class NewsPage extends React.Component {
       />
     ) : (
       <View>
-        <Header
-          // leftComponent={{
-          //   text: "back",
-          //   onPress: () => goBack(),
-          //   style: { color: "#fff" }
-          // }}
-          centerComponent={{
-            text: "News",
-            style: { color: "#fff", fontSize: 36, paddingBottom: 90 }
-          }}
-        />
+        <HeaderApp title="News" />
         <ScrollView style={styles.newsPage}>
           {newsList.map((data, idx) => {
             return (
@@ -64,3 +54,17 @@ let styles = StyleSheet.create({
   }
 });
 export default NewsPage;
+const HeaderApp = props => {
+  return (
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 10,
+        backgroundColor: "#4a89ef"
+      }}
+    >
+      <Text style={{ fontSize: 36, color: "white" }}>{props.title}</Text>
+    </View>
+  );
+};

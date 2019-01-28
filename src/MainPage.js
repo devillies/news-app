@@ -3,10 +3,11 @@ import {
   View,
   TextInput,
   ScrollView,
+  Text,
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-import { Header, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 class MainPage extends React.Component {
   navigationOptions = {
     title: "welcome"
@@ -56,18 +57,8 @@ class MainPage extends React.Component {
     let { news, sourcesName } = this.state;
 
     return (
-      <View>
-        <Header
-          centerComponent={{
-            text: "News Source",
-            style: {
-              color: "#fff",
-              fontSize: 36,
-              paddingBottom: 90
-            }
-          }}
-        />
-
+      <View style={{ flex: 1 }}>
+        <HeaderApp title="News Source" />
         <ScrollView style={styles.scrollStyle}>
           <View>
             {sourcesName.map((name, idx) => {
@@ -92,3 +83,18 @@ let styles = StyleSheet.create({
   }
 });
 export default MainPage;
+
+const HeaderApp = props => {
+  return (
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 10,
+        backgroundColor: "#4a89ef"
+      }}
+    >
+      <Text style={{ fontSize: 36, color: "white" }}>{props.title}</Text>
+    </View>
+  );
+};
