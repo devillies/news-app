@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
+import { Header } from "react-native-elements";
 class NewsPage extends React.Component {
   state = {
     newsList: [],
@@ -37,32 +38,44 @@ class NewsPage extends React.Component {
         onLoad={() => <Text>loading...</Text>}
       />
     ) : (
-      <ScrollView style={styles.mainPage}>
-        <Text style={styles.title}>News</Text>
-        {newsList.map((data, idx) => {
-          return (
-            <TouchableOpacity
-              key={idx}
-              onPress={() => this._toggleView(data.url)}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row"
-                }}
+      <View>
+        <Header
+          leftComponent={{
+            text: "back",
+            onPress: () => goBack(),
+            style: { color: "#fff" }
+          }}
+          centerComponent={{
+            text: "News",
+            style: { color: "#fff", fontSize: 36 }
+          }}
+        />
+        <ScrollView style={styles.mainPage}>
+          {newsList.map((data, idx) => {
+            return (
+              <TouchableOpacity
+                key={idx}
+                onPress={() => this._toggleView(data.url)}
               >
-                <Image
-                  style={{ height: 100, width: 100, alignSelf: "flex-start" }}
-                  source={{ uri: data.image }}
-                />
-                <View style={styles.textWrapper}>
-                  <Text style={styles.text}>{data.title}</Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row"
+                  }}
+                >
+                  <Image
+                    style={{ height: 100, width: 100, alignSelf: "flex-start" }}
+                    source={{ uri: data.image }}
+                  />
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.text}>{data.title}</Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+      </View>
     );
   }
 }

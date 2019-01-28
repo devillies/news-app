@@ -59,12 +59,13 @@ class MainPage extends React.Component {
     return (
       <View>
         <Header
-          leftComponent={{ icon: "menu", color: "#fff" }}
           centerComponent={{
             text: "News Source",
-            style: { color: "#fff", fontSize: 24 }
+            style: {
+              color: "#fff",
+              fontSize: 36
+            }
           }}
-          rightComponent={{ icon: "home", color: "#fff" }}
         />
 
         <ScrollView style={styles.scrollStyle}>
@@ -92,8 +93,7 @@ let styles = StyleSheet.create({
     fontSize: 24
   },
   scrollStyle: {
-    marginTop: 10,
-    backgroundColor: "#eae6ed"
+    backgroundColor: "#fff"
   },
   container: {
     flex: 1,
